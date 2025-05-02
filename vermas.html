@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Detalles del Juego - GameStore</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-900 text-white">
+    <!-- Header -->
+    <header class="flex justify-between items-center p-6 bg-gray-800">
+      <div class="text-2xl font-bold">GameStore</div>
+      <nav class="space-x-6">
+        <a href="index.html" class="hover:text-blue-400">Inicio</a>
+        <a href="tienda.html" class="hover:text-blue-400">Tienda</a>
+        <a href="cuenta.html" class="hover:text-blue-400">Cuenta</a>
+        <a href="biblioteca.html" class="hover:text-blue-400">Biblioteca</a>
+      </nav>
+    </header>
+
+    <!-- Detalles del Juego -->
+    <section class="p-10 max-w-6xl mx-auto" id="gameDetails">
+      <!-- Contenido cargado dinámicamente aquí -->
+    </section>
+
+    <script>
+      // Función para obtener el valor del parámetro 'game' en la URL
+      function getGameDetails() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const gameName = urlParams.get("game");
+
+        // Datos de los juegos
+        const games = {
+          "Cyberpunk 2077": {
+            img: "https://i.blogs.es/b109e9/cyberpunk2077-johnny-v-rgb_en/450_1000.jpg",
+            title: "Cyberpunk 2077",
+            description:
+              "Cyberpunk 2077 es un juego de rol y mundo abierto ambientado en Night City, una megalópolis obsesionada con el poder, el glamour y las modificaciones corporales. Juega como V, un mercenario en busca de un implante único que es la clave de la inmortalidad.",
+            price: "$29.99",
+            systemRequirements: [
+              { label: "SO", value: "Windows 10 64-bit" },
+              {
+                label: "Procesador",
+                value: "Intel Core i5-3570K o AMD FX-8310",
+              },
+              { label: "Memoria", value: "8 GB de RAM" },
+            ],
+          },
+          Fortnite: {
+            img: "https://image.api.playstation.com/vulcan/ap/rnd/202502/1417/18b2709aa2deea78db6794b2d98c622b6ff444506dd90ebc.jpg",
+            title: "Fortnite",
+            description:
+              "Fortnite es un juego de acción y supervivencia de batalla real en el que los jugadores luchan entre sí hasta que solo queda uno. El juego es gratuito y ofrece una experiencia de combate dinámica.",
+            price: "Gratis",
+            systemRequirements: [
+              { label: "SO", value: "Windows 7/8/10 64-bit" },
+              { label: "Procesador", value: "Intel Core i3 2.4 GHz" },
+              { label: "Memoria", value: "4 GB de RAM" },
+            ],
+          },
+          "Elden Ring": {
+            img: "https://generacionxbox.com/wp-content/uploads/2025/04/elden-ring-nightreign_2025-1024x576.jpg",
+            title: "Elden Ring",
+            description:
+              "Elden Ring es un juego de rol y acción de mundo abierto desarrollado por FromSoftware. Enfréntate a criaturas imponentes y explora un vasto mundo lleno de misterios.",
+            price: "$59.99",
+            systemRequirements: [
+              { label: "SO", value: "Windows 10 64-bit" },
+              {
+                label: "Procesador",
+                value: "Intel Core i7-3770K o AMD Ryzen 5 1600",
+              },
+              { label: "Memoria", value: "12 GB de RAM" },
+            ],
+          },
+          Minecraft: {
+            img: "https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2017/02/guia-todos-trucos-consejos-minecraft.jpg?tf=3840x",
+            title: "Minecraft",
+            description:
+              "Minecraft es un juego de construcción y aventura que permite a los jugadores explorar, construir y sobrevivir en un mundo generado aleatoriamente de bloques.",
+            price: "$26.95",
+            systemRequirements: [
+              { label: "SO", value: "Windows 10" },
+              { label: "Procesador", value: "Intel Core i3 o AMD Ryzen 3" },
+              { label: "Memoria", value: "4 GB de RAM" },
+            ],
+          },
+          "GTA V": {
+            img: "https://parental-control.flashget.com/wp-content/uploads/sites/3/2024/07/Grand-Theft-Auto-5.jpg",
+            title: "GTA V",
+            description:
+              "Grand Theft Auto V es un videojuego de acción y aventura que sigue las historias de tres criminales en Los Santos, una ciudad ficticia basada en Los Ángeles.",
+            price: "$14.99",
+            systemRequirements: [
+              { label: "SO", value: "Windows 10 64-bit" },
+              {
+                label: "Procesador",
+                value: "Intel Core i5-3470 o AMD X8 FX-8350",
+              },
+              { label: "Memoria", value: "8 GB de RAM" },
+            ],
+          },
+          Valorant: {
+            img: "https://www.riotgames.com/darkroom/1440/8d5c497da1c2eeec8cffa99b01abc64b:5329ca773963a5b739e98e715957ab39/ps-f2p-val-console-launch-16x9.jpg",
+            title: "Valorant",
+            description:
+              "Valorant es un juego de disparos táctico en primera persona donde dos equipos compiten para completar misiones en mapas detallados y estratégicos.",
+            price: "Gratis",
+            systemRequirements: [
+              { label: "SO", value: "Windows 7/8/10 64-bit" },
+              {
+                label: "Procesador",
+                value: "Intel i3-4150 o AMD Ryzen 3 1200",
+              },
+              { label: "Memoria", value: "4 GB de RAM" },
+            ],
+          },
+          "League of Legends": {
+            img: "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg",
+            title: "League of Legends",
+            description:
+              "League of Legends es un juego multijugador en línea de batalla de campo de batalla (MOBA) que enfrenta a dos equipos de campeones en una arena de combate estratégica.",
+            price: "Gratis",
+            systemRequirements: [
+              { label: "SO", value: "Windows 7/8/10 64-bit" },
+              { label: "Procesador", value: "Intel Core i3-530 o AMD A6-3650" },
+              { label: "Memoria", value: "4 GB de RAM" },
+            ],
+          },
+          "Call of Duty: Warzone": {
+            img: "https://nosdicengamers.com/wp-content/uploads/2024/08/warzone-temporada-3.jpg",
+            title: "Call of Duty: Warzone",
+            description:
+              "Warzone es un juego de batalla real en el que hasta 150 jugadores compiten para ser el último equipo o jugador en pie, con combate, estrategias y acción frenética.",
+            price: "Gratis",
+            systemRequirements: [
+              { label: "SO", value: "Windows 10 64-bit" },
+              {
+                label: "Procesador",
+                value: "Intel Core i3-4340 o AMD FX-6300",
+              },
+              { label: "Memoria", value: "8 GB de RAM" },
+            ],
+          },
+          "Among Us": {
+            img: "https://cdn.now.gg/apps-content/com.innersloth.spacemafia/ogimage/among-us.jpg",
+            title: "Among Us",
+            description:
+              "Among Us es un juego de deducción social en el que los jugadores deben descubrir quién es el impostor mientras realizan tareas en una nave espacial.",
+            price: "$4.99",
+            systemRequirements: [
+              { label: "SO", value: "Windows 7/8/10" },
+              { label: "Procesador", value: "2 GHz" },
+              { label: "Memoria", value: "1 GB de RAM" },
+            ],
+          },
+          "Apex Legends": {
+            img: "https://i.blogs.es/6fabf7/apex-legends/840_560.jpeg",
+            title: "Apex Legends",
+            description:
+              "Apex Legends es un juego de disparos en primera persona gratuito que se desarrolla en un mundo futurista y enfrenta equipos de jugadores con diferentes habilidades.",
+            price: "Gratis",
+            systemRequirements: [
+              { label: "SO", value: "Windows 7 64-bit" },
+              {
+                label: "Procesador",
+                value: "Intel Core i3-6300 3.8GHz o AMD A10-5800K 3.8GHz",
+              },
+              { label: "Memoria", value: "6 GB de RAM" },
+            ],
+          },
+          Overwatch: {
+            img: "https://guiaoverwatch.wordpress.com/wp-content/uploads/2017/02/original.png",
+            title: "Overwatch",
+            description:
+              "Overwatch es un juego de disparos en equipo en el que los jugadores eligen héroes con habilidades únicas y luchan para completar objetivos en mapas variados.",
+            price: "$19.99",
+            systemRequirements: [
+              { label: "SO", value: "Windows 10" },
+              {
+                label: "Procesador",
+                value: "Intel Core i3 o AMD Phenom X3 8650",
+              },
+              { label: "Memoria", value: "4 GB de RAM" },
+            ],
+          },
+          "Resident Evil Village": {
+            img: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1196590/capsule_616x353.jpg?t=1741142800",
+            title: "Resident Evil Village",
+            description:
+              "Resident Evil Village es un juego de terror de supervivencia en el que los jugadores deben enfrentarse a criaturas terroríficas mientras buscan respuestas en un misterioso pueblo.",
+            price: "$39.99",
+            systemRequirements: [
+              { label: "SO", value: "Windows 10 64-bit" },
+              {
+                label: "Procesador",
+                value: "Intel Core i7-8700K o AMD Ryzen 5 3600",
+              },
+              { label: "Memoria", value: "8 GB de RAM" },
+            ],
+          },
+        };
+
+        const game = games[gameName];
+
+        // Si el juego existe, carga los detalles
+        if (game) {
+          const gameDetailsHtml = `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- Imagen grande -->
+            <img src="${
+              game.img
+            }" alt="Imagen del Juego" class="rounded-lg shadow-lg">
+
+            <!-- Información -->
+            <div>
+              <h1 class="text-4xl font-bold mb-4">${game.title}</h1>
+              <p class="text-gray-400 mb-6">${game.description}</p>
+
+              <!-- Precio -->
+              <div class="text-3xl font-bold text-green-400 mb-4">${
+                game.price
+              }</div>
+
+              <!-- Especificaciones -->
+              <div class="bg-gray-800 p-6 rounded-lg mb-6">
+                <h2 class="text-2xl font-semibold mb-4">Requisitos del Sistema</h2>
+                <ul class="list-disc list-inside text-gray-300 space-y-2">
+                  ${game.systemRequirements
+                    .map(
+                      (req) =>
+                        `<li><strong>${req.label}:</strong> ${req.value}</li>`
+                    )
+                    .join("")}
+                </ul>
+              </div>
+
+
+            <!-- Botón "Agregar a Biblioteca" -->
+<button 
+  onclick="addToLibrary('${game.title}', '${game.img}');" 
+  class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">
+  Agregar a Biblioteca
+</button>
+
+      
+            </div>
+          </div>
+        `;
+
+          document.getElementById("gameDetails").innerHTML = gameDetailsHtml;
+        } else {
+          // Si no se encuentra el juego, muestra un mensaje
+          document.getElementById("gameDetails").innerHTML =
+            "<p>Juego no encontrado.</p>";
+        }
+      }
+
+      // Función para agregar el juego a la biblioteca
+      function addToLibrary(title, img) {
+        const library = JSON.parse(localStorage.getItem("library")) || []; // Obtiene la biblioteca actual o un array vacío si no existe
+
+        // Verifica si el juego ya está en la biblioteca
+        const gameExists = library.some((game) => game.title === title);
+
+        if (!gameExists) {
+          library.push({ title, img }); // Agrega el juego si no existe
+          localStorage.setItem("library", JSON.stringify(library)); // Guarda la nueva biblioteca en localStorage
+          // Solo redirige a la página de compra si el juego fue agregado
+          window.location.href = "comprar.html"; // Redirige si el juego fue agregado
+        } else {
+          alert(
+            "Este juego ya está en tu biblioteca. No se realizará la compra."
+          );
+        }
+      }
+
+      // Llamar a la función al cargar la página
+      getGameDetails();
+    </script>
+    <div id="footer"></div>
+  </body>
+</html>
